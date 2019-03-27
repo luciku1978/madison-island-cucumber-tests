@@ -23,6 +23,13 @@ public class ProductsGrid {
         return productNameContainers;
     }
 
+    @FindBy(xpath = "//div[@class='product-info' and .//button[contains(@class, 'btn-cart')]]//h2[@class='product-name']/a")
+    private List<WebElement> addToCartProductNameContainers;
+
+    public List<WebElement> getAddToCartProductNameContainers() {
+        return addToCartProductNameContainers;
+    }
+
     public List<String> getProductNames(){
         List<String> names = new ArrayList<>();
 
