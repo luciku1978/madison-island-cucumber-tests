@@ -4,6 +4,8 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.fasttrackit.DriverManager;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 public class Hooks {
 
@@ -18,6 +20,15 @@ public class Hooks {
     @After
     public void tearDown(Scenario scenario) throws InterruptedException {
         Thread.sleep(4000);
+
+        scenario.write("Custom information.");
+
+        if (scenario.isFailed()){
+            byte[] screenshot = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.embed(screenshot, "image/png");
+
+        }
+
         DriverManager.getDriver().quit();
     }
 }
